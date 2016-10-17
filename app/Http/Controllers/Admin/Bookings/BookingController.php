@@ -81,13 +81,13 @@ class BookingController extends Controller
 
         $request = $this->request->all();
 
-        if (isset($request['conditions'])) {
-            foreach ($request['conditions'] as $key => $value) {
-                $bookings->where($key, $value);
+        if (isset($request)) {
+            foreach ($request as $key => $value) {
+                $bookings = $bookings->where($key, '=', $value);
             }
         }
 
-        $bookings = $bookings->all();
+        $bookings = $bookings->get();
 
         $data = $this->transform($bookings);
 

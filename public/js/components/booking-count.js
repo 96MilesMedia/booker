@@ -10,9 +10,15 @@ new Vue({
     },
     beforeCreate: function () {
         var self = this;
-        console.log(12313)
-        this.$http.get('/backend/booking/all', [{status: 'pending'}], {method: 'GET', emulateHTTP: true, emulateJSON: true})
+
+        this.$http.get('/backend/booking/all',
+            {
+                emulateHTTP: true,
+                emulateJSON: true,
+                params: {'status': 'pending'}
+            })
             .then(function (success) {
+                console.log(success);
                 self.bookingCount = success.body.data.length;
             });
     }
