@@ -1,3 +1,13 @@
+/**
+ * Component: Bookings
+ *
+ * Vue Component retrieves all bookings
+ * and handles the deletion of individual items.
+ *
+ * Still a work in progress, VueJS seems to have removed
+ * some decent functionality for handling deletion so
+ * this implementation feels very hacky at the moment.
+ */
 var vm = new Vue({
     el: '#bookings',
     data: {
