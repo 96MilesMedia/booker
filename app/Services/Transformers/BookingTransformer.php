@@ -11,14 +11,16 @@ class BookingTransformer extends TransformerAbstract implements TransformerInter
     public function transform($booking)
     {
         return [
-            'uid' => $booking->uid,
-            'email' => $booking->email,
-            'name' => $booking->name,
-            'date' => $booking->date,
-            'time' => $booking->time,
-            'size' => $booking->size,
+            'uid'       => $booking->uid,
+            'email'     => $booking->email,
+            'name'      => $booking->name,
+            'date'      => $booking->date,
+            'rawDate'   => date('Y-m-d', strtotime($booking->date)),
+            'time'      => $booking->time,
+            'size'      => $booking->size,
             'telephone' => $booking->telephone,
-            'status' => $booking->status
+            'status'    => $booking->status,
+            'rawStatus' => strtolower($booking->status)
         ];
     }
 }

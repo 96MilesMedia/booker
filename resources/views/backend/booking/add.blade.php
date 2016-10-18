@@ -13,6 +13,15 @@
     {!! Form::close() !!}
 
     <script type="text/javascript">
-        var booking = {data: {}};
+        var booking = {data: {
+            name : '',
+            email : '',
+            date : '',
+            time : '',
+            size : '',
+            status : '',
+            telephone : '',
+            created_at : ''
+        }};
     </script>
 @stop

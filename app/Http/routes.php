@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::put('/api/booking/{id}', 'Bookings\BookingController@update');
+
 
 /**
  * Admin Routes
@@ -46,13 +48,15 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Admin'], function () {
 
         Route::delete('/booking/{id}', 'Bookings\BookingController@delete')->name('deleteBooking');
 
+        Route::get('/booking/date', 'Bookings\BookingController@bookingsByDate')->name("dateBooking");
+        Route::get('/booking/{date}', 'Bookings\BookingController@getBookingsByDate')->name("getBookingsByDate");
+
         Route::post('/booking', "Bookings\BookingController@create");
 
         // Booking Settings Routes
 
-        Route::get('/booking/settings', function () {
-            return view('backend.booking.settings');
-        });
+        Route::get('/booking/settings/view', "Bookings\BookingSettingsController@view")->name('viewSettings');
 
+        Route::get('/booking/settings', "Bookings\BookingSettingsController@get");
         Route::post('/booking/settings', "Bookings\BookingSettingsController@update");
 });

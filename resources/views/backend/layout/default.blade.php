@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="/css/backend/app.css?v=1" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" media="all" />
     <link rel="stylesheet" type="text/css" href="/css/pignose.calendar.css" media="all" />
 
     <!-- External JavaScripts -->
@@ -61,6 +62,7 @@
         <script type="text/javascript" src="/js/calander/prism.min.js"></script>
         <script type="text/javascript" src="/js/calander/moment.min.js"></script>
         <script type="text/javascript" src="/js/calander/pignose.calendar.js"></script>
+        <script type="text/javascript" src="/js/timepicker/jquery.timepicker.min.js"></script>
 
         <!-- Vue Components -->
         <script type="text/javascript" src="/js/vue.min.js"></script>
@@ -69,6 +71,7 @@
             Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
         </script>
         <script type="text/javascript" src="/js/components/booking-count.js"></script>
+        <script type="text/javascript" src="/js/components/booking-settings-storage.js"></script>
 
         @foreach ($scripts as $script)
             <script type="text/javascript" src="/js/{!! $script !!}"></script>
@@ -78,7 +81,10 @@
         <script type="text/javascript">
             $('.input-calendar').pignoseCalendar({
                 buttons: true,
-                format: 'DD-MM-YYYY'
+                format: 'DD-MM-YYYY',
+                apply: function (data) {
+                    $('#date').attr('value', data);
+                }
             });
         </script>
         <!-- End: Date Picker Module Code -->
@@ -96,6 +102,10 @@
             }, 300);
 
             @endif
+        </script>
+
+        <script type="text/javascript">
+            $('.time-general').timepicker();
         </script>
 
         <dialog class="mdl-dialog">

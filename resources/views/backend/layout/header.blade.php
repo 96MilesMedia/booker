@@ -19,7 +19,7 @@
     <span class="mdl-layout-title">Admin Menu</span>
     <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="/backend/booking">Bookings</a>
-        <a class="mdl-navigation__link" href="">Booking Settings</a>
+        <a class="mdl-navigation__link" href="/backend/booking/settings/view">Booking Settings</a>
         <a class="mdl-navigation__link" href="">About Page</a>
         <a class="mdl-navigation__link" href=""><i class="fa fa-sign-out"></i> Logout</a>
 

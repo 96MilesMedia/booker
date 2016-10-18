@@ -1,0 +1,50 @@
+@extends('backend.layout.default')
+@section('content')
+    <div class="page-wrap" id="bookingsManage">
+        <div class="mdl-grid">
+
+            <div class="mdl-cell mdl-cell--4-col" v-for="booking in bookings" v-cloak>
+                <div class="card-wrap">
+
+                    <div class="demo-card-event mdl-card mdl-shadow--2dp"
+                        v-bind:class="{ 'mdl-card--complete': (booking.rawStatus == 'completed') }">
+                        <div class="mdl-card__title mdl-card--expand">
+                            <h4>
+                                {{ booking.name }} ({{ booking.size }})<br>
+                                {{ booking.date }}<br>
+                                {{ booking.time }}
+                            </h4>
+                        </div>
+                        <div class="mdl-card__actions mdl-card--border">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" v-on:click="viewBooking($event, booking)">
+                            View Details
+                            </a>
+                            <div class="mdl-layout-spacer"></div>
+                            <i class="material-icons">event</i>
+                        </div>
+
+                        <div class="mdl-card__actions mdl-card__actions--alt mdl-card--border" v-show="booking.rawStatus != 'completed'">
+                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" v-on:click="completeBooking($event, booking)">
+                            Party Arrived?
+                            </a>
+                            <div class="mdl-layout-spacer"></div>
+                            <i class="material-icons">accessibility</i>
+                        </div>
+
+                        <div class="mdl-card__actions mdl-card--border" v-show="booking.rawStatus == 'completed'">
+                            <span class="mdl-chip mdl-chip--contact">
+                                <span class="mdl-chip__contact mdl-color--light-green mdl-color-text--white">C</span>
+                                <span class="mdl-chip__text">Booking Arrived</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var viewRoute = "{!! route('viewBooking', ['id' => '']) !!}";
+        var bookingDate = "{!! $date !!}";
+    </script>
+@stop

@@ -18,7 +18,10 @@
                 </div>
             </div>
             <div class="mdl-cell--3-col">
-                <div class="section section--right section--padded-sides">
+                <div class="section section--padded-sides">
+                    <div v-if="booking.status == 'Cancelled'">
+                        <p class="body">Booking has either been cancelled or rejected. There are no more actions that can be assigned to this booking now.</p>
+                    </div>
                     <div v-cloak v-if="booking.status != 'Cancelled'">
                         <button type="submit"
                                 name="confirm-booking"

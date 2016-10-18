@@ -3,26 +3,35 @@
 namespace App\Http\Controllers\Admin\Bookings;
 
 use App\Models\Booking;
+use App\Models\BookingSettings;
 use Validator;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Bookings\BaseBookingController;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
+use App\Core\Traits\BookingTrait;
 use App\Services\Transformers\BookingTransformer;
 
-class BookingController extends Controller
+class BookingController extends BaseBookingController
 {
-    const STATUS_PENDING = 'pending';
+    use BookingTrait;
 
-    const STATUS_CONFIRMED = 'confirmed';
-
-    const STATUS_REJECTED = 'rejected';
-
-    const STATUS_CANCELLED = 'cancelled';
-
-    public function __construct(Request $request, BookingTransformer $transformer)
+    public function bookingsByDate()
     {
-        $this->request = $request;
-        $this->setTransformer($transformer);
+        $request = $this->request->all();
+
+        if (!$request['date']) {
+            throw \Exception("A date parameter is required");
+        }
+
+        $date = $request['date'];
+
+        $this->setPageTitle("Bookings for: " . date('jS F Y', strtotime($date)));
+
+        $this->pageAttributes['date'] = date('Y-m-d', strtotime($date));
+
+        $this->addScript('components/booking-manage.js');
+
+        return $this->loadViewWithScripts('backend.booking.date-list');
     }
 
     /**
@@ -73,7 +82,11 @@ class BookingController extends Controller
         return $this->loadViewWithScripts('backend.booking.index');
     }
 
+    // ------------------------
+    //
     // Getters and Setters
+    //
+    // ------------------------
 
     public function all()
     {
@@ -94,6 +107,34 @@ class BookingController extends Controller
         return $this->respond($data, 200);
     }
 
+    /**
+     * Rather than using the all route this is a very specific
+     * case for getting only bookings by a date that
+     * are confirmed and completed so it requires a sub query
+     *
+     * @param  string $date
+     * @return collection
+     */
+    public function getBookingsByDate($date)
+    {
+        $model = new Booking();
+
+        $bookings = $model->where('date', '=', $date)
+                          ->where(function ($query) {
+                              return $query->where('status', '=', self::STATUS_CONFIRMED)
+                                         ->orWhere('status', '=', self::STATUS_COMPLETED);
+                          })
+                          ->orderBy('time', 'ASC')
+                          ->get();
+
+        $data = $this->transform($bookings);
+
+        return $this->respond($data, 200);
+    }
+
+    /**
+     * @todo - Move into trait for shared api
+     */
     public function create()
     {
         $booking = new Booking;
@@ -134,31 +175,9 @@ class BookingController extends Controller
      */
     public function update($id)
     {
-        $request = $this->request->all();
+        $result = $this->updateBooking($id);
 
-        $booking = Booking::where('uid', $id)->first();
-
-        $booking->email = $request['email'];
-        $booking->name = $request['name'];
-        $booking->date = $request['date'];
-        $booking->time = $request['time'];
-        $booking->size = $request['size'];
-        $booking->telephone = $request['telephone'];
-        $booking->status = self::STATUS_PENDING;
-
-        if (isset($request['confirm-booking'])) {
-            $booking->status = self::STATUS_CONFIRMED;
-        }
-
-        if (isset($request['cancel-booking'])) {
-            $booking->status = self::STATUS_CANCELLED;
-        }
-
-        if (isset($request['reject-booking'])) {
-            $booking->status = self::STATUS_REJECTED;
-        }
-
-        if ($booking->save()) {
+        if ($result) {
             return redirect()
                 ->route('viewBooking', [
                     'id' => $booking->uid
