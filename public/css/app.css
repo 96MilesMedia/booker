@@ -2271,39 +2271,6 @@ blockquote {
   border-radius: 6px; }
 
 /**
- * Paddings
- */
-@media screen and (min-width: 1024px) {
-  .padding-x-lg {
-    padding-left: 40px;
-    padding-right: 40px; } }
-
-@media screen and (max-width: 1023px) {
-  .padding-x-lg {
-    padding-left: 20px;
-    padding-right: 20px; } }
-
-@media screen and (max-width: 580px) {
-  .padding-x-lg {
-    padding-left: 20px;
-    padding-right: 20px; } }
-
-@media screen and (min-width: 1024px) {
-  .padding-y-lg {
-    padding-top: 40px;
-    padding-bottom: 40px; } }
-
-@media screen and (max-width: 1023px) {
-  .padding-y-lg {
-    padding-top: 20px;
-    padding-bottom: 20px; } }
-
-@media screen and (max-width: 580px) {
-  .padding-y-lg {
-    padding-top: 20px;
-    padding-bottom: 20px; } }
-
-/**
  * Decorate
  */
 .shadow {

@@ -289,22 +289,6 @@
 }
 
 /**
- * Paddings
- */
-
-.padding-sm {
-    @include padding($padding-sm);
-}
-
-.padding-x-lg {
-    @include padding-x($padding-lg-sizes);
-}
-
-.padding-y-lg {
-    @include padding-y($padding-lg-sizes);
-}
-
-/**
  * Decorate
  */
 

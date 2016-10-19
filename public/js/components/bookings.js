@@ -11,16 +11,28 @@
 var vm = new Vue({
     el: '#bookings',
     data: {
-        bookings: []
+        bookings: [],
+        field: 'date',
+        reverse: 'desc'
     },
     beforeCreate: function () {
         var self = this;
         this.$http.get('/api/admin/booking/all', {}, {method: 'GET', emulateHTTP: true, emulateJSON: true})
             .then(function (success) {
-                self.bookings = success.body.data;
+
+                var data = success.body.data;
+
+                self.bookings = data;
             });
     },
     methods: {
+
+        /**
+         * Removes a booking
+         *
+         * @param  {Object} event
+         * @param  {Object} item
+         */
         deleteBooking: function (event, item) {
             event.preventDefault();
 
@@ -61,10 +73,54 @@ var vm = new Vue({
                     });
             });
         },
+
+        /**
+         * View a booking
+         *
+         * @param  {Object} event
+         * @param  {Object} item
+         */
         viewBooking: function (event, item) {
             event.preventDefault();
 
             window.location = viewRoute + '/' + item.uid;
+        },
+
+        /**
+         * Sets the column and direction to be sorted by
+         *
+         * @param  {Object} event
+         * @param  {String} column
+         */
+        sortColumns: function (event, column) {
+            event.preventDefault();
+
+            var icon = $(event.target).children(0);
+
+            this.field = column;
+            this.reverse = (this.reverse == 'desc' ? 'asc' : 'desc');
+
+            // A little bit dirty but quick...
+            // toggle class wouldn't work on the font awesome element
+            if (this.reverse == 'asc') {
+                icon.removeClass('fa-chevron-down');
+                icon.addClass('fa-chevron-up');
+            } else {
+                icon.removeClass('fa-chevron-up');
+                icon.addClass('fa-chevron-down');
+            }
+        }
+    },
+    computed: {
+
+        /**
+         * Due to the removal of filters, using a computed
+         * function that returns the data based on ordering
+         * using the loadash library and the component properties
+         * for the column to sort and direction
+         */
+        orderedBookings: function () {
+            return _.orderBy(this.bookings, this.field, this.reverse);
         }
     }
 })

@@ -27,7 +27,9 @@
 </head>
     <body class="svg">
         <div class="mdl-layout mdl-js-layout">
-            @include('backend.layout.header')
+            @if (!isset($hide_nav))
+                @include('backend.layout.header')
+            @endif
                 <main class="mdl-layout__content">
                     <div class="page-content">
 
@@ -55,6 +57,7 @@
 
         <!-- Generic JavaScript Libraries -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script>
         <script src="/js/material.min.js"></script>
 
         <!-- Start: Date Picker Module Code -->
@@ -70,13 +73,17 @@
         <script type="text/javascript">
             Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
         </script>
+        @if (!isset($hide_nav))
         <script type="text/javascript" src="/js/components/booking-count.js"></script>
+        <script type="text/javascript" src="/js/components/last-page.js"></script>
         <script type="text/javascript" src="/js/components/booking-settings-storage.js"></script>
+        @endif
 
-        @foreach ($scripts as $script)
-            <script type="text/javascript" src="/js/{!! $script !!}"></script>
-        @endforeach
-
+        @if (isset($scripts))
+            @foreach ($scripts as $script)
+                <script type="text/javascript" src="/js/{!! $script !!}"></script>
+            @endforeach
+        @endif
 
         <script type="text/javascript">
             $('.input-calendar').pignoseCalendar({

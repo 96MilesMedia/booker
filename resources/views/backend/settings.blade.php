@@ -1,7 +1,6 @@
 @extends('backend.layout.default')
 @section('content')
     <div class="login-section">
-        <h3>Login</h3>
         <div class="login-form" id="auth">
             <div class="login-form-inputs">
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

@@ -20,11 +20,14 @@ Route::get('/', function () {
 
 
 /**
- * Front-end API Routes
+ * API ROUTES
  */
 
 Route::group(['prefix' => 'api'], function () {
 
+    /**
+     * Front-end API Routes
+     */
     Route::group(['prefix' => 'booking', 'namespace' => 'Bookings'], function () {
 
         // Front-end Booking Routes
@@ -36,9 +39,23 @@ Route::group(['prefix' => 'api'], function () {
 
     });
 
+    /**
+     * Backend/Admin API Routes
+     */
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 
-        Route::group(['prefix' => 'booking', 'namespace' => 'Bookings'], function () {
+        /**
+         * Auth Routes
+         */
+        Route::group(['prefix' => 'auth'], function () {
+
+            Route::post('/login', 'AuthController@authenticate');
+            Route::post('/register', 'AuthController@register');
+            Route::post('/logout', ['middleware' => 'auth', 'uses' => 'AuthController@logout']);
+
+        });
+
+        Route::group(['prefix' => 'booking', 'namespace' => 'Bookings', 'middleware' => 'auth'], function () {
 
             // Admin Booking Routes
             Route::get('/all', "BookingController@all");
@@ -57,13 +74,20 @@ Route::group(['prefix' => 'api'], function () {
 
 Route::group(['prefix' => 'backend', 'namespace' => 'Admin'], function () {
 
-    // INDEX
+    /**
+     * Index Route
+     */
 
-    Route::get('/', function () {
-        return view('backend.index');
-    });
+    Route::get('/', 'IndexController@index');
+    Route::get('/login', 'IndexController@index');
+    Route::get('/dashboard', 'IndexController@dashboard');
+    Route::get('/settings', 'IndexController@settings');
 
-        // BOOKINGS
+    /**
+     * Booking Routes
+     */
+
+    Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/booking', "Bookings\BookingController@index");
 
@@ -82,5 +106,7 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Admin'], function () {
         // Booking Settings Routes
 
         Route::get('/booking/settings/view', "Bookings\BookingSettingsController@view")->name('viewSettings');
+
+    });
 
 });

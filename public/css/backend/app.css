@@ -12013,6 +12013,13 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 /**
  * Padding Settings
  */
+/*-----------------------------------------
+
+    Prefix for box-sizing
+
+    @author Ashley Banks <ashley@d3r.com>
+
+-------------------------------------------*/
 /**
  * Generic Layout Classes
  */
@@ -12284,6 +12291,32 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   background: rgba(0, 0, 0, 0.26); }
 
 /**
+ * Login Screen Components
+ */
+.login-section {
+  padding-top: 160px;
+  padding-bottom: 160px;
+  width: 100%;
+  text-align: center; }
+  @media screen and (max-width: 580px) {
+    .login-section {
+      padding-top: 40px;
+      padding-bottom: 40px; } }
+
+.login-form {
+  width: 40%;
+  margin: auto; }
+  @media screen and (max-width: 580px) {
+    .login-form {
+      width: 100%; } }
+
+.login-form-footer {
+  padding-top: 20px;
+  text-align: right;
+  width: 90%;
+  margin: auto; }
+
+/**
  * Buttons
  */
 .mdl-button--colored--positive {
@@ -12348,5 +12381,62 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 
 .margin-right-md {
   margin-right: 20px; }
+
+/**
+ * Paddings
+ */
+/**
+ * Paddings
+ */
+.padding-top-sm {
+  padding-top: 10px; }
+
+.padding-bottom-sm {
+  padding-bottom: 10px; }
+
+.padding-top-md {
+  padding-top: 20px; }
+
+.padding-bottom-md {
+  padding-bottom: 20px; }
+
+.padding-top-lg {
+  padding-top: 40px; }
+
+.padding-bottom-lg {
+  padding-bottom: 40px; }
+
+@media screen and (min-width: 1024px) {
+  .padding-x-lg {
+    padding-left: 40px;
+    padding-right: 40px; } }
+
+@media screen and (max-width: 1023px) {
+  .padding-x-lg {
+    padding-left: 20px;
+    padding-right: 20px; } }
+
+@media screen and (max-width: 580px) {
+  .padding-x-lg {
+    padding-left: 20px;
+    padding-right: 20px; } }
+
+@media screen and (min-width: 1024px) {
+  .padding-y-lg {
+    padding-top: 40px;
+    padding-bottom: 40px; } }
+
+@media screen and (max-width: 1023px) {
+  .padding-y-lg {
+    padding-top: 20px;
+    padding-bottom: 20px; } }
+
+@media screen and (max-width: 580px) {
+  .padding-y-lg {
+    padding-top: 20px;
+    padding-bottom: 20px; } }
+
+.cursor {
+  cursor: pointer; }
 
 /*# sourceMappingURL=app.css.map */

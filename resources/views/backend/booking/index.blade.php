@@ -41,16 +41,16 @@
                 <tr>
                     <th class="mdl-data-table__cell--non-numeric">Name</th>
                     <th>Size</th>
-                    <th class="mdl-data-table__cell--non-numeric">Date</th>
+                    <th class="mdl-data-table__cell--non-numeric cursor" v-on:click="sortColumns($event, 'date')"><i class="fa fa-chevron-down"></i> Date</th>
                     <th class="mdl-data-table__cell--non-numeric">Time</th>
-                    <th class="mdl-data-table__cell--non-numeric">Email</th>
+                    <th class="mdl-data-table__cell--non-numeric cursor" v-on:click="sortColumns($event, 'email')"><i class="fa fa-chevron-down"></i> Email</th>
                     <th class="mdl-data-table__cell--non-numeric">Telephone</th>
-                    <th class="mdl-data-table__cell--non-numeric">Status</th>
+                    <th class="mdl-data-table__cell--non-numeric cursor" v-on:click="sortColumns($event, 'status')"><i class="fa fa-chevron-down"></i> Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="booking in bookings" v-cloak>
+                <tr v-for="booking in orderedBookings" v-cloak>
                     <td class="mdl-data-table__cell--non-numeric">{{ booking.name }}</td>
                     <td>{{ booking.size }}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{ booking.date }}</td>
@@ -58,8 +58,6 @@
                     <td class="mdl-data-table__cell--non-numeric">{{ booking.email }}</td>
                     <td class="mdl-data-table__cell--non-numeric">{{ booking.telephone }}</td>
                     <td class="mdl-data-table__cell--non-numeric">
-                        <!-- <span class="mdl-badge" data-badge="♥" v-if="booking.status == 'Pending'">{{ booking.status }}</span> -->
-
                         <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'pending'">
                             <span class="mdl-chip__contact mdl-color--pink mdl-color-text--white">
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
