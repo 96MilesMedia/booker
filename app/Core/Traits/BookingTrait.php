@@ -3,7 +3,31 @@
 namespace App\Core\Traits;
 use App\Models\Booking;
 
+use Webpatser\Uuid\Uuid;
+
 trait BookingTrait {
+
+    public function createBooking()
+    {
+        $booking = new Booking;
+
+        $request = $this->request->all();
+
+        $booking->uid = Uuid::generate();
+        $booking->email = $request['email'];
+        $booking->name = $request['name'];
+        $booking->date = $request['date'];
+        $booking->time = $request['time'];
+        $booking->size = $request['size'];
+        $booking->telephone = $request['telephone'];
+        $booking->status = self::STATUS_PENDING;
+
+        if ($booking->save()) {
+            return $booking;
+        }
+
+        return false;
+    }
 
     public function updateBooking($id)
     {
@@ -12,7 +36,10 @@ trait BookingTrait {
         $booking = Booking::where('uid', $id)->first();
 
         foreach ($request as $key => $value) {
-            $booking->{$key} = $value;
+            // Check fields are valid updatable fields
+            if (in_array($key, $this->updateableFields)) {
+                $booking->{$key} = $value;
+            }
         }
 
         // Backend picking up manual submits for the time being

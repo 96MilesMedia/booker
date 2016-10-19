@@ -12051,10 +12051,14 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 .mdl-layout__header--sub {
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: rgba(0, 0, 0, 0.06); }
+  /*background-color: rgba(0,0,0,.06);*/
+  background-color: #606fc7; }
 
 .primary-title {
   color: #000; }
+
+.primary-title--white {
+  color: #fff; }
 
 .body {
   color: rgba(0, 0, 0, 0.26); }
@@ -12292,6 +12296,13 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   background: rgba(0, 0, 0, 0.26); }
   .mdl-button--colored--neutral:hover {
     background: rgba(0, 0, 0, 0.26); }
+
+/**
+ * Spinners
+ */
+.mdl-spinner--submit-form {
+  top: 10px;
+  left: -15px; }
 
 /**
  * Margins

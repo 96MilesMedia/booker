@@ -11,14 +11,14 @@ class Booking extends Model
         return $this->attributes['date'] = date('Y-m-d', strtotime($value));
     }
 
+    public function setStatusAttribute($value)
+    {
+        return $this->attributes['status'] = strtolower($value);
+    }
+
     public function getDateAttribute($value)
     {
         return date('d-m-Y', strtotime($value));
-    }
-
-    public function getStatusAttribute($value)
-    {
-        return ucfirst($value);
     }
 
     public function getNameAttribute($value)

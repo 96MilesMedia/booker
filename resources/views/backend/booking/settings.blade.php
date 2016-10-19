@@ -5,13 +5,13 @@
         <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width">
             <thead>
                 <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Settings Type</th>
-                    <th>Settings Value</th>
+                    <th class="mdl-data-table__cell--non-numeric">Adjust Booking Settings</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td class="mdl-data-table__cell--non-numeric">Number of seats</td>
+                    <td class="mdl-data-table__cell--non-numeric">Availability per time slot</td>
                     <td>
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" name="seats" type="text" id="seats" pattern="-?[0-9]*(\.[0-9]+)?" v-model="settings.seats">
@@ -75,8 +75,11 @@
             </tbody>
         </table>
         <div class="section section--right">
-            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-              Save Settings
+            <div class="mdl-spinner mdl-spinner--submit-form mdl-js-spinner is-active" v-show="formSubmitted" v-cloak></div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                    :disabled="formSubmitted"
+                    v-on:click="updateSettings($event)">
+                Save Settings
             </button>
         </div>
     </div>

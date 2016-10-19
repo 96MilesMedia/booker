@@ -11,7 +11,7 @@ new Vue({
     beforeCreate: function () {
         var self = this;
 
-        this.$http.get('/backend/booking/all',
+        this.$http.get('/api/admin/booking/all',
             {
                 emulateHTTP: true,
                 emulateJSON: true,

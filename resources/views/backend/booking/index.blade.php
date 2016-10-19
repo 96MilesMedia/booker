@@ -16,7 +16,7 @@
                             <i class="material-icons">event</i>
                         </button>
                         <div class="mdl-tooltip" data-mdl-for="filter-date">
-                            View Bookings by Date
+                            View Active Bookings by Date
                         </div>
                     </div>
                 </div>
@@ -60,35 +60,35 @@
                     <td class="mdl-data-table__cell--non-numeric">
                         <!-- <span class="mdl-badge" data-badge="♥" v-if="booking.status == 'Pending'">{{ booking.status }}</span> -->
 
-                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'Pending'">
+                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'pending'">
                             <span class="mdl-chip__contact mdl-color--pink mdl-color-text--white">
                                 <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
                             </span>
                             <span class="mdl-chip__text">Pending</span>
                         </span>
 
-                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'Confirmed'">
+                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'confirmed'">
                             <span class="mdl-chip__contact mdl-color--green mdl-color-text--white">
                                 <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                             </span>
                             <span class="mdl-chip__text">Confirmed</span>
                         </span>
 
-                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'Cancelled'">
+                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'cancelled'">
                             <span class="mdl-chip__contact mdl-color--red mdl-color-text--white">
                                 <i class="fa fa-close" aria-hidden="true"></i>
                             </span>
                             <span class="mdl-chip__text">Cancelled</span>
                         </span>
 
-                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'Rejected'">
+                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'rejected'">
                             <span class="mdl-chip__contact mdl-color--red mdl-color-text--white">
                                 <i class="fa fa-thumbs-down" aria-hidden="true"></i>
                             </span>
                             <span class="mdl-chip__text">Rejected</span>
                         </span>
 
-                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'Completed'">
+                        <span class="mdl-chip mdl-chip--contact" v-if="booking.status == 'completed'">
                             <span class="mdl-chip__contact mdl-color--grey mdl-color-text--white">
                                 <i class="fa fa-check"></i>
                             </span>

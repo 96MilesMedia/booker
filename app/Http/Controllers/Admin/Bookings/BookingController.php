@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
 use App\Core\Traits\BookingTrait;
 use App\Services\Transformers\BookingTransformer;
+use App\Services\Booking\Exceptions\CreateBookingException;
+use App\Services\Booking\Exceptions\UpdateBookingException;
 
 class BookingController extends BaseBookingController
 {
@@ -75,7 +77,7 @@ class BookingController extends BaseBookingController
      */
     public function index()
     {
-        $this->setPageTitle("Bookings");
+        $this->setPageTitle("Booking Management");
 
         $this->addScript('components/bookings.js');
 
@@ -108,54 +110,18 @@ class BookingController extends BaseBookingController
     }
 
     /**
-     * Rather than using the all route this is a very specific
-     * case for getting only bookings by a date that
-     * are confirmed and completed so it requires a sub query
-     *
-     * @param  string $date
-     * @return collection
-     */
-    public function getBookingsByDate($date)
-    {
-        $model = new Booking();
-
-        $bookings = $model->where('date', '=', $date)
-                          ->where(function ($query) {
-                              return $query->where('status', '=', self::STATUS_CONFIRMED)
-                                         ->orWhere('status', '=', self::STATUS_COMPLETED);
-                          })
-                          ->orderBy('time', 'ASC')
-                          ->get();
-
-        $data = $this->transform($bookings);
-
-        return $this->respond($data, 200);
-    }
-
-    /**
      * @todo - Move into trait for shared api
      */
     public function create()
     {
-        $booking = new Booking;
-
-        $request = $this->request->all();
-
-        $booking->uid = Uuid::generate();
-        $booking->email = $request['email'];
-        $booking->name = $request['name'];
-        $booking->date = $request['date'];
-        $booking->time = $request['time'];
-        $booking->size = $request['size'];
-        $booking->telephone = $request['telephone'];
-        $booking->status = self::STATUS_PENDING;
-
-        if ($booking->save()) {
+        if ($booking = $this->createBooking()) {
             return redirect()
                 ->route('viewBooking', [
                     'id' => $booking->uid
                 ])
                 ->with("success", "New Booking has been created.");
+        } else {
+            throw new CreateBookingException("There was a problem creating booking");
         }
     }
 
@@ -180,9 +146,11 @@ class BookingController extends BaseBookingController
         if ($result) {
             return redirect()
                 ->route('viewBooking', [
-                    'id' => $booking->uid
+                    'id' => $id
                 ])
                 ->with("success", "Booking has been updated.");
+        } else {
+            throw new UpdateBookingException("There was a problem updating the booking");
         }
     }
 }

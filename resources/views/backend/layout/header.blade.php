@@ -22,13 +22,12 @@
         <a class="mdl-navigation__link" href="/backend/booking/settings/view">Booking Settings</a>
         <a class="mdl-navigation__link" href="">About Page</a>
         <a class="mdl-navigation__link" href=""><i class="fa fa-sign-out"></i> Logout</a>
-
     </nav>
 </div>
 
 <header class="mdl-layout__header mdl-layout__header--sub mdl-layout__header--scroll">
     <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title"><h3 class="primary-title">{!! (isset($page_title) ? $page_title : "") !!}</h3></span>
+        <span class="mdl-layout-title"><h3 class="primary-title primary-title--white">{!! (isset($page_title) ? $page_title : "") !!}</h3></span>
     </div>
 </header>

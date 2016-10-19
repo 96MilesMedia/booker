@@ -18,13 +18,42 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::put('/api/booking/{id}', 'Bookings\BookingController@update');
 
+/**
+ * Front-end API Routes
+ */
 
+Route::group(['prefix' => 'api'], function () {
+
+    Route::group(['prefix' => 'booking', 'namespace' => 'Bookings'], function () {
+
+        // Front-end Booking Routes
+        Route::put('/{id}', 'BookingController@update');
+        Route::get('/{date}/{valid?}', 'BookingController@getBookingsByDate')->name("getBookingsByDate");
+
+        // Booking Settings
+        Route::get('/settings', 'BookingSettingsController@get');
+
+    });
+
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+
+        Route::group(['prefix' => 'booking', 'namespace' => 'Bookings'], function () {
+
+            // Admin Booking Routes
+            Route::get('/all', "BookingController@all");
+            Route::delete('/{id}', 'BookingController@delete')->name('deleteBooking');
+
+            // Booking Settings
+            Route::put('/settings', "Bookings\BookingSettingsController@update");
+        });
+
+    });
+
+});
 /**
  * Admin Routes
  */
-
 
 Route::group(['prefix' => 'backend', 'namespace' => 'Admin'], function () {
 
@@ -38,25 +67,20 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Admin'], function () {
 
         Route::get('/booking', "Bookings\BookingController@index");
 
-        Route::get('/booking/all', "Bookings\BookingController@all");
-
         Route::get('/booking/view/{id}', "Bookings\BookingController@view")->name("viewBooking");
 
         Route::get('/booking/new', 'Bookings\BookingController@add')->name("newBooking");
 
+        // NON API
         Route::put('/booking/{id}', 'Bookings\BookingController@update')->name('updateBooking');
 
-        Route::delete('/booking/{id}', 'Bookings\BookingController@delete')->name('deleteBooking');
-
         Route::get('/booking/date', 'Bookings\BookingController@bookingsByDate')->name("dateBooking");
-        Route::get('/booking/{date}', 'Bookings\BookingController@getBookingsByDate')->name("getBookingsByDate");
 
+        // Booking Routes
         Route::post('/booking', "Bookings\BookingController@create");
 
         // Booking Settings Routes
 
         Route::get('/booking/settings/view', "Bookings\BookingSettingsController@view")->name('viewSettings');
 
-        Route::get('/booking/settings', "Bookings\BookingSettingsController@get");
-        Route::post('/booking/settings', "Bookings\BookingSettingsController@update");
 });

@@ -25,6 +25,22 @@ class BaseBookingController extends Controller
 
     const STATUS_COMPLETED = 'completed';
 
+    /**
+     * Valid Updateable fields
+     *
+     * @todo  Move into repository with crud methods
+     *
+     * @var array
+     */
+    protected $updateableFields = [
+        'email',
+        'name',
+        'date',
+        'time',
+        'status',
+        'telephone',
+    ];
+
     public function __construct(Request $request, BookingTransformer $transformer)
     {
         $this->request = $request;

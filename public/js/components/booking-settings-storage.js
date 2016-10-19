@@ -10,7 +10,7 @@ var bookingSettingsCache = new Vue({
 
         if (!localStorage.getItem('BOOKING_SETTINGS')) {
 
-            this.$http.get('/backend/booking/settings',
+            this.$http.get('/api/booking/settings',
                 {
                     emulateHTTP: true,
                     emulateJSON: true

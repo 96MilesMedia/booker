@@ -16,16 +16,13 @@ var bookingForm = new Vue({
 
             var newDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
-            this.$http.get('/backend/booking/all',
+            this.$http.get('/api/booking/' + newDate + '/valid',
             {
                 emulateHTTP: true,
-                emulateJSON: true,
-                params: {
-                    'date': newDate
-                }
+                emulateJSON: true
             })
             .then(function (success) {
-
+                console.log(success)
                 var data = success.body.data;
 
                 this.loadTImes(data);
@@ -44,9 +41,12 @@ var bookingForm = new Vue({
 
                 var rangeFrom = String(value.time);
 
+                // Format date
+                var newDate = moment(value.date, 'DD-MM-YYYY').format('YYYY-MM-DD');
+
                 // Calculate the range of the booking e.g 10:30am with a time_allocation of 30 minutes should have 10:30am
-                var hour = moment(value.rawDate + 'T' + value.time).add(settings.time_allocation, 'minutes').hour();
-                var minutes = moment(value.rawDate + 'T' + value.time).add(settings.time_allocation, 'minutes').minutes();
+                var hour = moment(newDate + 'T' + value.time).add(settings.time_allocation, 'minutes').hour();
+                var minutes = moment(newDate + 'T' + value.time).add(settings.time_allocation, 'minutes').minutes();
                 var amPm = rangeFrom.slice(5, 7);
 
                 var rangeTo = hour + ':' + minutes + amPm;

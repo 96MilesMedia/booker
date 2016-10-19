@@ -25,15 +25,6 @@ class BookingSettingsController extends Controller
         return $this->loadViewWithScripts('backend.booking.settings');
     }
 
-    public function get()
-    {
-        $settings = BookingSettings::find(1);
-
-        $data = $this->transform($settings);
-
-        return $this->respond($data, 200);
-    }
-
     public function update()
     {
         $request = $this->request->all();
@@ -48,6 +39,6 @@ class BookingSettingsController extends Controller
 
         $settings->save();
 
-        return redirect('backend/booking/settings/view')->with("success", "Settings are all updated now.");
+        return $this->respondUpdated("Booking Settings successfully updated");
     }
 }

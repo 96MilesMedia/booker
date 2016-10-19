@@ -15,7 +15,7 @@ var vm = new Vue({
     },
     beforeCreate: function () {
         var self = this;
-        this.$http.get('/backend/booking/all', {}, {method: 'GET', emulateHTTP: true, emulateJSON: true})
+        this.$http.get('/api/admin/booking/all', {}, {method: 'GET', emulateHTTP: true, emulateJSON: true})
             .then(function (success) {
                 self.bookings = success.body.data;
             });
@@ -42,7 +42,7 @@ var vm = new Vue({
 
                 var _that = _this;
 
-                _this.$http.delete('/backend/booking/' + item.uid)
+                _this.$http.delete('/api/admin/booking/' + item.uid)
                     .then(function (success) {
                         if (success.status == 200) {
 

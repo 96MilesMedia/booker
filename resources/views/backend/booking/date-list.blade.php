@@ -7,7 +7,7 @@
                 <div class="card-wrap">
 
                     <div class="demo-card-event mdl-card mdl-shadow--2dp"
-                        v-bind:class="{ 'mdl-card--complete': (booking.rawStatus == 'completed') }">
+                        v-bind:class="{ 'mdl-card--complete': (booking.status == 'completed') }">
                         <div class="mdl-card__title mdl-card--expand">
                             <h4>
                                 {{ booking.name }} ({{ booking.size }})<br>
@@ -23,7 +23,7 @@
                             <i class="material-icons">event</i>
                         </div>
 
-                        <div class="mdl-card__actions mdl-card__actions--alt mdl-card--border" v-show="booking.rawStatus != 'completed'">
+                        <div class="mdl-card__actions mdl-card__actions--alt mdl-card--border" v-show="booking.status != 'completed'">
                             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" v-on:click="completeBooking($event, booking)">
                             Party Arrived?
                             </a>
@@ -31,9 +31,9 @@
                             <i class="material-icons">accessibility</i>
                         </div>
 
-                        <div class="mdl-card__actions mdl-card--border" v-show="booking.rawStatus == 'completed'">
+                        <div class="mdl-card__actions mdl-card--border" v-show="booking.status == 'completed'">
                             <span class="mdl-chip mdl-chip--contact">
-                                <span class="mdl-chip__contact mdl-color--light-green mdl-color-text--white">C</span>
+                                <span class="mdl-chip__contact mdl-color--light-green mdl-color-text--white"><i class="fa fa-check"></i></span>
                                 <span class="mdl-chip__text">Booking Arrived</span>
                             </span>
                         </div>

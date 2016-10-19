@@ -64,7 +64,7 @@
                 <td class="mdl-data-table__cell--non-numeric">Status</td>
                 <td>
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" name="status" type="text" id="status" v-model="status"  readonly="readonly">
+                        <input class="mdl-textfield__input" name="status" type="text" id="status" v-model="status" v-capitalize readonly="readonly">
                         <label class="mdl-textfield__label" for="status">Status</label>
                     </div>
                 </td>
