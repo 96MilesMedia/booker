@@ -29,8 +29,6 @@ var vm = new Vue({
 
             var _this = this;
 
-            item.status = 'completed';
-
             dialog.querySelector('.agree').addEventListener('click', function() {
 
                 _this.$http.put('/api/booking/' + item.uid, {
