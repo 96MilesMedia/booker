@@ -44,6 +44,32 @@ var bookingForm = new Vue({
             // Load the settings from the storage
             var settings = JSON.parse(localStorage.getItem('BOOKING_SETTINGS'));
 
+            /**
+             * As the timepicker annoyingly formats the time
+             * without a pre-pending zero on the times under 10,
+             * the momentjs requires the zero before hand to be
+             * a valid time.
+             * (It's late and thats what it was looking like I'm beginning to question that now)
+             *
+             * Therefore this formats the time in a really horrible way
+             * as we have the am/pm attached to the string
+             *
+             * @param  {String} time
+             * @return {String}
+             */
+            function formatTime(time) {
+                var split = time.split(':');
+                var newTime;
+
+                if (split[0] <= 9) {
+                    newTime = '0'+split[0];
+                }
+
+                newTime = newTime + ':' + split[1].slice(0, 2);
+
+                return newTime;
+            }
+
             // Organise times that have been pre-booked
             var timesBooked = [];
             $.each(data, function (index, value) {
@@ -52,24 +78,30 @@ var bookingForm = new Vue({
 
                 // Format date
                 var newDate = moment(value.date, 'DD-MM-YYYY').format('YYYY-MM-DD');
+                var formattedTime = formatTime(rangeFrom);
+
+                var formattedDate = newDate + 'T' + formattedTime;
 
                 // Calculate the range of the booking e.g 10:30am with a time_allocation of 30 minutes should have 10:30am
-                var hour = moment(newDate + 'T' + value.time).add(settings.time_allocation, 'minutes').hour();
-                var minutes = moment(newDate + 'T' + value.time).add(settings.time_allocation, 'minutes').minutes();
-                var amPm = rangeFrom.slice(5, 7);
-
+                var hour = moment(formattedDate).add(settings.time_allocation, 'minutes').hour();
+                var minutes = moment(formattedDate).add(settings.time_allocation, 'minutes').minutes();
+                // Repeated code here of the formattedTime function but this attaches the same am/pm
+                // however it's not being clever nor intuitive if it runs over 12:30am to pm...
+                var timeSplit = rangeFrom.split(':');
+                var amPm = timeSplit[1].slice(2, 5);
                 var rangeTo = hour + ':' + minutes + amPm;
 
-                var range = [rangeFrom, rangeTo];
+                var range = [
+                    rangeFrom,
+                    rangeTo
+                ];
 
                 timesBooked.push(range);
 
             });
 
             var timePickerSettings = {
-                disableTimeRanges: [
-                    ['10:00am', '10:30am']
-                ],
+                disableTimeRanges: timesBooked,
                 minTime: settings.opening_time,
                 maxTime: settings.closing_time,
                 step: settings.time_allocation,
