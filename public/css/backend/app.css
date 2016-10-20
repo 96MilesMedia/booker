@@ -12249,46 +12249,75 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
 .dtp .center {
   text-align: center; }
 
+/**
+ * Booking Cards
+ * -----------------------
+ *
+ * Display the booking information
+ */
 .card-wrap {
   padding-left: 20px;
   padding-right: 20px; }
 
-.demo-card-event.mdl-card {
+.card-event.mdl-card {
   /*width: 256px;*/
   /*height: 256px;*/
   background: #3E4EB8;
   width: 100%; }
 
-.demo-card-event.mdl-card--complete {
+.card-event.mdl-card--complete {
   background: rgba(0, 0, 0, 0.26); }
 
-.demo-card-event > .mdl-card__actions {
+.card-event > .mdl-card__actions {
   border-color: rgba(255, 255, 255, 0.2); }
 
-.demo-card-event > .mdl-card__title {
+.card-event > .mdl-card__title {
   -ms-flex-align: start;
   align-items: flex-start; }
 
-.demo-card-event > .mdl-card__title > h4 {
+.card-event > .mdl-card__title > h4 {
   margin-top: 0; }
 
-.demo-card-event > .mdl-card__actions {
+.card-event > .mdl-card__actions {
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
   -ms-flex-align: center;
   align-items: center; }
 
-.demo-card-event > .mdl-card__actions > .material-icons {
+.card-event > .mdl-card__actions > .material-icons {
   padding-right: 10px; }
 
-.demo-card-event > .mdl-card__title,
-.demo-card-event > .mdl-card__actions,
-.demo-card-event > .mdl-card__actions > .mdl-button {
+.card-event > .mdl-card__title,
+.card-event > .mdl-card__actions,
+.card-event > .mdl-card__actions > .mdl-button {
   color: #fff; }
 
 .mdl-card__actions--alt {
   background: rgba(0, 0, 0, 0.26); }
+
+/**
+ * Information Cards
+ * -----------------------
+ *
+ * Used within the dashboard
+ */
+.info-card-wide.mdl-card {
+  width: 100%; }
+
+.info-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url("../../backend/image/bookings.png") center/cover; }
+
+.info-card-wide > .mdl-card__menu {
+  color: #fff; }
+
+.info-card-wide--pending > .mdl-card__title {
+  background: url("../../backend/image/pending.png") center/cover; }
+
+.info-card-wide--new > .mdl-card__title {
+  background: url("../../backend/image/new-booking.png") center/cover; }
 
 /**
  * Login Screen Components
@@ -12315,6 +12344,16 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   text-align: right;
   width: 90%;
   margin: auto; }
+
+/**
+ * Settings
+ */
+.user-settings {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.mdl-mini-footer__logo {
+  max-width: 160px; }
 
 /**
  * Buttons

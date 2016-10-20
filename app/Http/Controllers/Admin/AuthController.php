@@ -41,19 +41,22 @@ class AuthController extends Controller
         return $this->respondInternalError("Could not log out");
     }
 
-    public function updatePassword()
+    public function updateSettings()
     {
-        $credentials = $this->request->get('password');
+        $credentials = $this->request->all();
 
-        $user = User::find($this->user->userid);
+        $user = Sentinel::findById(Sentinel::getUser()->id);
 
-        $validate = $this->validateCurrentPassword($credentials['currentPassword'], $user);
+        // For when confirming old password comes in
+        // $validate = $this->validateCurrentPassword($credentials['currentPassword'], $user);
+        $validate = true;
 
         if (!$validate) {
             return $this->respondBadRequest("Invalid Password");
         }
 
         $res = Sentinel::update($user, [
+                'email'    => $credentials['email'],
                 'password' => $credentials['password']
             ]);
 

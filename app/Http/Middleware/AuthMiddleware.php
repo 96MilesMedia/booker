@@ -30,9 +30,13 @@ class AuthMiddleware
         $check = Sentinel::check();
 
         if (!$check) {
-            $errCtrl = new Controller();
-
-            return $errCtrl->respondUnauthorized(USER_NOT_LOGGED_IN);
+            // API Response otherwise redirect
+            if ($request->ajax() || $request->wantsJson()) {
+                $errCtrl = new Controller();
+                return $errCtrl->respondUnauthorized("User is not logged in!");
+            } else {
+                return redirect()->guest('/backend/login');
+            }
         }
 
         return $next($request);

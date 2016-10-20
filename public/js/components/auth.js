@@ -29,6 +29,9 @@ new Vue({
                 })
                 .then(function (success) {
 
+                    var user = success.body.data;
+                    localStorage.setItem('USER_DETAILS', JSON.stringify(user));
+
                     window.location = "/backend/dashboard";
 
                     this.submitted = false;

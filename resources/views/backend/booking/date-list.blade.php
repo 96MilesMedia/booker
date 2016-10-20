@@ -1,12 +1,15 @@
 @extends('backend.layout.default')
 @section('content')
     <div class="page-wrap" id="bookingsManage">
+        <div v-if="bookings.length == 0" v-cloak>
+            <h3 class="primary-title">No Bookings Found</h3>
+            <p class="body">Looks like the calander is clear for this date so far.</p>
+        </div>
         <div class="mdl-grid">
-
             <div class="mdl-cell mdl-cell--4-col" v-for="booking in bookings" v-cloak>
                 <div class="card-wrap">
 
-                    <div class="demo-card-event mdl-card mdl-shadow--2dp"
+                    <div class="card-event mdl-card mdl-shadow--2dp"
                         v-bind:class="{ 'mdl-card--complete': (booking.status == 'completed') }">
                         <div class="mdl-card__title mdl-card--expand">
                             <h4>

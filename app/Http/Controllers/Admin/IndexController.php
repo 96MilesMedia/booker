@@ -29,7 +29,9 @@ class IndexController extends Controller
     {
         $this->addScript('components/auth.js');
 
-        $this->setPageTitle("Welcome");
+        $this->setPageTitle("Dashboard");
+
+        $this->pageAttributes['hide_back'] = true;
 
         // dd(Sentinel::getUser()->id);
 
@@ -38,7 +40,7 @@ class IndexController extends Controller
 
     public function settings()
     {
-        $this->addScript('components/auth.js');
+        $this->addScript('components/user-settings.js');
 
         $this->setPageTitle("Settings");
 

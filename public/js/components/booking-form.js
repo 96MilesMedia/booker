@@ -13,6 +13,17 @@ var bookingForm = new Vue({
     data: booking.data,
     watch: {
         date: function (value) {
+            console.log("watching");
+            this.getBookings(value);
+        }
+    },
+    methods: {
+
+        reloadDate: function () {
+            this.getBookings(this.date);
+        },
+
+        getBookings: function (value) {
 
             var newDate = moment(value, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
@@ -22,14 +33,12 @@ var bookingForm = new Vue({
                 emulateJSON: true
             })
             .then(function (success) {
-                console.log(success)
                 var data = success.body.data;
 
                 this.loadTImes(data);
             });
-        }
-    },
-    methods: {
+        },
+
         loadTImes: function (data) {
 
             // Load the settings from the storage
@@ -68,50 +77,10 @@ var bookingForm = new Vue({
             };
 
             $('#time').timepicker(timePickerSettings);
-        },
 
-        timeActive: function () {
-            if (!this.date) {
-                return true;
-            } else {
-                return false;
-            }
+            this.timeActive = true;
         }
     }
-    // Wanted to be more Vue'y and use a directive for the date
-    // but the bind doesn't seem to ever pick up and listening
-    // for value change just doesn't work, so had to go the hacky route
-    // and do a basic jquery on change below to then change the model value :(
-    // directives: {
-    //     datechange: {
-    //         // twoWay: true,
-    //         inserted: function (item) {
-    //             console.log("Directive loaded");
-
-    //             var self = this;
-
-    //             console.log('loaded')
-
-    //             var element = item.getAttribute('id');
-
-    //             $('#' + element).change(function(event) {
-
-    //                 var value = $(event.target).val();
-    //                 self[element] = value;
-    //                 self.date = value;
-    //                 self.$set(value);
-    //             });
-    //         },
-    //         bind: function () {
-
-    //         },
-    //         // "unbind": function () {
-    //         //     var self = this;
-
-    //         //     $(self.el).unmask(self.mask);
-    //         // }
-    //     }
-    // }
 });
 
 // Directive binding just seems so overly convuluted

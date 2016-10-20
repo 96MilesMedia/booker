@@ -12,12 +12,13 @@ var bookingSettings = new Vue({
     beforeCreate: function () {
         var self = this;
 
-        this.$http.get('/api/booking/settings',
+        this.$http.get('/api/settings/booking',
             {
                 emulateHTTP: true,
                 emulateJSON: true
             })
             .then(function (success) {
+                console.log(success);
                 self.settings = success.body.data;
             });
     },

@@ -21,7 +21,8 @@
             size : '',
             status : '',
             telephone : '',
-            created_at : ''
+            created_at : '',
+            timeActive: false
         }};
     </script>
 @stop

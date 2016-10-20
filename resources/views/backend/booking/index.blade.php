@@ -25,14 +25,14 @@
             <div class="mdl-cell--6-col">
                 <div class="section section--right">
                     <p>
-                        <span class="body">New Booking</span>
-                        <a href="{!! route('newBooking') !!}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" id="new-booking">
+                        <!-- <span class="body">New Booking</span> -->
+                        <a href="{!! route('newBooking') !!}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" id="new-booking-button">
                             <i class="material-icons">add</i>
                         </a>
-                        <div class="mdl-tooltip" data-mdl-for="new-booking">
-                            Create a new booking
-                        </div>
                     </p>
+                    <div class="mdl-tooltip" data-mdl-for="new-booking-button">
+                        Create new booking
+                    </div>
                 </div>
             </div>
         </div>

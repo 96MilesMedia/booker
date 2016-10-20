@@ -28,6 +28,6 @@ class BookingSettingsController extends Controller
 
         $data = $this->transform($settings);
 
-        return $this->respond($data, 200);
+        return $this->respond($data, 202);
     }
 }

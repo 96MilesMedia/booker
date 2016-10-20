@@ -46,8 +46,8 @@
                         </div>
                     </div>
                 </main>
+            @include('backend.layout.footer')
         </div>
-        @include('backend.layout.footer')
 
         <!-- Generic Snack Bar HTML -->
         <div class="mdl-js-snackbar mdl-js-snackbar--success mdl-snackbar">

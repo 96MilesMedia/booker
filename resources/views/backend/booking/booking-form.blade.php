@@ -51,11 +51,16 @@
                 <td class="mdl-data-table__cell--non-numeric">Time of Booking</td>
                 <td>
                     <div class="mdl-textfield mdl-js-textfield" id="time-tooltip">
-                        <input class="mdl-textfield__input" name="time" type="text" id="time" v-model="time" required="true" :disabled="timeActive()">
+                        <input class="mdl-textfield__input" name="time" type="text" id="time" v-model="time" required="true" :disabled="timeActive == false">
                         <label class="mdl-textfield__label" for="time"></label>
 
-                        <div class="mdl-tooltip" data-mdl-for="time-tooltip" v-if="timeActive()">
-                            Date must be set to choose time
+                        <a v-on:click="reloadDate()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--mini-fab mdl-button--colored" id="new-booking" v-if="status == 'pending'" v-cloak>
+                            <i class="material-icons">autorenew</i>
+                        </a>
+
+                        <div class="mdl-tooltip" data-mdl-for="time-tooltip" v-if="timeActive == false && (status == 'pending' || status == '')">
+                            <span v-if="status == ''">Date must be set to choose time</span>
+                            <span v-if="status == 'pending'">To change the time<br>press the reload date<br>button to the right of this field.</span>
                         </div>
                     </div>
                 </td>
