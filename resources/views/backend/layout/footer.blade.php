@@ -4,7 +4,9 @@
         <ul class="mdl-mini-footer__link-list">
             <li><a href="#">© {!! date('Y') !!}</a></li>
             <li><a href="#">Privacy</a></li>
+            @if (!isset($hide_nav))
             <li><a href="/backend/settings">Settings</a></li>
+            @endif
         </ul>
     </div>
 </footer>
