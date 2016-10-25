@@ -63,7 +63,7 @@ var vm = new Vue({
                             // Settling for this at the moment as it seems VueJs removed the very
                             // useful method of $remove and every other method possible does not work to
                             // delete one item from the property!!!
-                            this.$http.get('/backend/booking/all', {}, {method: 'GET', emulateHTTP: true, emulateJSON: true})
+                            this.$http.get('/api/admin/booking/all', {}, {method: 'GET', emulateHTTP: true, emulateJSON: true})
                                 .then(function (success) {
                                     _this.bookings = success.body.data;
                                 });
