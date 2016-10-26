@@ -60,6 +60,9 @@
         <script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script>
         <script src="/js/material.min.js"></script>
 
+        <script type="text/javascript" src="/js/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+
         <!-- Start: Date Picker Module Code -->
         <script type="text/javascript" src="/js/calander/bootstrap.min.js"></script>
         <script type="text/javascript" src="/js/calander/prism.min.js"></script>
@@ -68,16 +71,13 @@
         <script type="text/javascript" src="/js/timepicker/jquery.timepicker.min.js"></script>
 
         <!-- Vue Components -->
-        <script type="text/javascript" src="/js/vue.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
         <script type="text/javascript">
             Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
         </script>
-        @if (!isset($hide_nav))
-        <script type="text/javascript" src="/js/components/booking-count.js"></script>
-        <script type="text/javascript" src="/js/components/last-page.js"></script>
-        <script type="text/javascript" src="/js/components/booking-settings-storage.js"></script>
-        @endif
+
+        <!-- This must be included to run bookings -->
+        @include('backend.booker.includes.scripts')
+        <!-- End Booker Scripts -->
 
         @if (isset($scripts))
             @foreach ($scripts as $script)

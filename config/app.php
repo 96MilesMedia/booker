@@ -161,6 +161,7 @@ return [
          * External Composer Packages
          */
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Twentysix\Booker\BookerServiceProvider::class
 
     ],
 
