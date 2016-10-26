@@ -10,9 +10,8 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
         <nav class="mdl-navigation">
-            <div id="bookingCount">
-                <a class="mdl-navigation__link" href="/backend/booking"><span class="mdl-badge" v-bind:data-badge="bookingCount">Bookings</span></a>
-            </div>
+            <!-- Include Booking Count Here -->
+            @include('backend.booker.includes.booking-nav')
             <a class="mdl-navigation__link" href="/backend/settings"><i class="fa fa-cogs"></i> Settings</a>
             <div id="auth">
                 <a class="mdl-navigation__link cursor" v-on:click="logout($event)"><i class="fa fa-sign-out"></i> Logout</a>
